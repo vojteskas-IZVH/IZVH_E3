@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -68,6 +69,10 @@ public class Enemy : MonoBehaviour
          *  - Physical body of the enemy: mRigidBody
          * Implement a simple AI, which will head towards the closest player and follow them.
          */
+        var player = GameManager.Instance.NearestPlayer(transform.position);
+        if (player is null) return;
+        var direction = player.transform.position - transform.position; 
+        transform.position += speed/33 * direction.normalized;
     }
 
     /// <summary>
